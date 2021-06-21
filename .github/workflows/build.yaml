@@ -7,9 +7,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Create artifact
-        shell:
+        shell: bash
         run: |
-          echo "" > tag.txt
+          echo ${GITHUB_SHA::6} > tag.txt
       - name: Upload artifact with image tag
         uses: actions/upload-artifact@v2
         with:
