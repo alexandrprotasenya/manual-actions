@@ -1,0 +1,25 @@
+name: Deploy
+on: 
+  workflow_dispatch:
+    inputs:
+      commitTag:
+        description: 'Commit to deploy'  
+jobs:
+  printInputs:
+    runs-on: ubuntu-latest
+    steps:
+    - run: |
+        echo "Tags: ${{ github.event.inputs.commitTag }}"
+  Deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: image-tag
+      - name: Print the final result
+        shell: bash
+        run: |
+          value=`cat tag.txt`
+          echo The result is $value

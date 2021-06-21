@@ -1,0 +1,17 @@
+name: Build
+on: [push]
+
+jobs:
+  Build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create artifact
+        shell:
+        run: |
+          echo "" > tag.txt
+      - name: Upload artifact with image tag
+        uses: actions/upload-artifact@v2
+        with:
+          name: image-tag
+          path: tag.txt
